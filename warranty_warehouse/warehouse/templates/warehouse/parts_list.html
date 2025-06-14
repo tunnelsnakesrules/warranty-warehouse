@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Склад запчастей</title>
+</head>
+<body>
+    <h1>Список запчастей</h1>
+    <form method="get">
+        <input type="text" name="q" placeholder="Поиск по заказ-наряду или хранению">
+        <button type="submit">Поиск</button>
+        <p><a href="{% url 'add_part' %}">➕ Добавить новую запчасть</a></p>
+    </form>
+    <table border="1">
+        <tr>
+            <th>Заказ-наряд</th>
+            <th>Название</th>
+            <th>Артикул</th>
+            <th>Кол-во</th>
+            <th>Хранение</th>
+            <th>Статус</th>
+        </tr>
+        {% for part in parts %}
+        <tr>
+            <td>{{ part.order.number }}</td>
+            <td>{{ part.name }}</td>
+            <td>{{ part.part_number }}</td>
+            <td>{{ part.quantity }}</td>
+            <td>{{ part.storage_location.code }}</td>
+            <td>{{ part.get_status_display }}</td>
+        </tr>
+        {% endfor %}
+    </table>
+</body>
+</html>
